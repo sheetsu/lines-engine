@@ -18,17 +18,17 @@ module Lines
         format.html {
           @first_page = (params[:page] and params[:page].to_i > 0) ? false : true
           if params[:tag]
-            @articles = Article.published.tagged_with(params[:tag]).page(params[:page].to_i)
+            @articles = Article.published.tagged_with(params[:tag]).page_kaminari(params[:page].to_i)
           else
-            @articles = Article.published.page(params[:page].to_i).padding(1)
+            @articles = Article.published.page_kaminari(params[:page].to_i).padding(1)
           end
-          
+
           if @articles.first_page?
             if @first_article = Article.published.first
               @first_article.teaser = nil unless @first_article.teaser.present?
             end
           end
-          
+
           set_meta_tags title: SITE_TITLE,
                         description: CONFIG[:meta_description],
                         keywords: KEYWORDS,

@@ -1,7 +1,7 @@
 # Provides the CRUD operations for +Article+.
-# Also handles base64 encoded file uploads and toggling of 
+# Also handles base64 encoded file uploads and toggling of
 # published and featured state of an +Article+
-# 
+#
 # Inherits from +Admin::ApplicationController+ to ensure authentication.
 
 require_dependency "lines/admin/application_controller"
@@ -14,11 +14,11 @@ module Lines
       autocomplete :tag, :name, class_name: 'ActsAsTaggableOn::Tag'
       before_action :process_base64_upload, only: [:create, :update]
 
-      # Lists all articles. Provides <tt>@articles_unpublished</tt> and 
+      # Lists all articles. Provides <tt>@articles_unpublished</tt> and
       # <tt>@articles_published</tt> to distinguish between published and
       # unpublished articles
       def index
-        @articles = Article.order('published ASC, published_at DESC, created_at DESC').page(params[:page]).per(25)
+        @articles = Article.order('published ASC, published_at DESC, created_at DESC').page_kaminari(params[:page]).per(25)
         @articles_unpublished = @articles.select{|a| a.published == false}
         @articles_published = @articles.select{|a| a.published == true}
         respond_to do |format|
@@ -74,8 +74,8 @@ module Lines
 
         # delete uploaded hero image when predifined image is selected
         if !a_params[:hero_image_cache].present? && a_params[:short_hero_image].present?
-          @article.remove_hero_image! 
-          @article.remove_hero_image = true 
+          @article.remove_hero_image!
+          @article.remove_hero_image = true
           @article.save
         end
 
@@ -141,7 +141,7 @@ module Lines
 
           #create a new uploaded file
           @uploaded_file = ActionDispatch::Http::UploadedFile.new(
-            tempfile: tempfile, 
+            tempfile: tempfile,
             filename: picture_filename,
             original_filename: picture_original_filename
           )
@@ -164,8 +164,8 @@ module Lines
 
         # Allowed attribute with strong_params
         def article_params
-          params.require(:article).permit(:content, :teaser, :hero_image, :short_hero_image, :published, 
-            :published_at, :sub_title, :title, :hero_image_cache, :tag_list, :gplus_url, :featured, 
+          params.require(:article).permit(:content, :teaser, :hero_image, :short_hero_image, :published,
+            :published_at, :sub_title, :title, :hero_image_cache, :tag_list, :gplus_url, :featured,
             :document, :document_cache, :hero_image_file, :remove_document, :remove_hero_image, :pictures,
             pictures_attributes: [:id, :image, :name, :article_id], author_ids: [] )
         end
