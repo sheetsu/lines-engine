@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'bcrypt', '~> 3.1.0', '>= 3.1.0'
   s.add_runtime_dependency 'sitemap_generator', '~> 5.0.0', '>= 5.0.5'
   s.add_runtime_dependency 'jquery-fileupload-rails', '>= 0.4.1'
+  s.add_runtime_dependency 'jquery-ui-rails', '>= 5.0.0'
   s.add_runtime_dependency 'sanitize', '>= 4.4.0'
   s.add_runtime_dependency 'sass-rails', '>= 4.0.0'
   s.add_runtime_dependency 'coffee-rails', '< 6', '>= 4.0.0'
