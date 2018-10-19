@@ -11,13 +11,13 @@
   <div class="article_header">
     <h1><%= link_to article_small.title, article_path(article_small) %></h1>
     <h2><%= article_small.sub_title %></h2>
-    <div class="author_name"><span>by</span> <%= display_article_authors(article_small) %></div>
+    <div class="author_name"><span>Autor: </span> <%= display_article_authors(article_small) %></div>
   </div>
 
   <div class="article_teaser">
     <%= render_teaser(article_small).html_safe %>
     <div class="more-link">
-      <%= link_to "Read full article", article_path(article_small) %>
+      <%= link_to "Dowiedz się więcej", article_path(article_small) %>
     </div>
   </div>
 <% end %>

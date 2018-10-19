@@ -13,7 +13,7 @@
   <div class="article_header">
     <h1><%= link_to article.title, article_path(article) %></h1>
     <h2><%= article.sub_title %></h2>
-    <div class="author_name"><span>by</span> <%= display_article_authors(article) %></div>
+    <div class="author_name"><span>Autor: </span> <%= display_article_authors(article) %></div>
   </div>
 
   <div class="article_teaser">
@@ -24,7 +24,7 @@
     <%= markdown article.content %>
     <% if article.document? %>
     <div class="article_document">
-      <%= link_to "Download #{article.document.file.filename}", article.document_url %>
+      <%= link_to "Ściągnij #{article.document.file.filename}", article.document_url %>
     </div>
     <% end %>
   </div>
@@ -34,12 +34,12 @@
       <a href="<%= article.gplus_url %>">Discuss this article at Google+</a>
     </div>
   <% end %>
-  
+
   <hr>
 
   <div class="article_footer">
-    Written on <span class="published_at"><%= article.published_at.to_date %></span> by <%= display_article_authors(article, true) %>
+    Napisane <span class="published_at"><%= article.published_at.to_date %></span> przez <%= display_article_authors(article, true) %>
   </div>
-  
+
 <% end %>
 </div>
